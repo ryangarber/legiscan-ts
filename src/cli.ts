@@ -20,13 +20,19 @@ const program = new Command();
 
 program.name("legiscan").description("CLI for Legiscan API").version(packageJson.version);
 
-const clientSource = fs.readFileSync(
-  path.resolve(
-    import.meta.dirname,
-    import.meta.dirname.includes("/dist") ? "index.js" : "client.ts"
-  ),
-  "utf-8"
-);
+// Compiled binaries (scripts/build.ts) have no files beside them to read, so
+// the client's source is built into them
+declare const LEGISCAN_CLIENT_SOURCE: string | undefined;
+const clientSource =
+  typeof LEGISCAN_CLIENT_SOURCE === "string"
+    ? LEGISCAN_CLIENT_SOURCE
+    : fs.readFileSync(
+        path.resolve(
+          import.meta.dirname,
+          import.meta.dirname.includes("/dist") ? "index.js" : "client.ts"
+        ),
+        "utf-8"
+      );
 const parsed = parse(clientSource);
 
 // Find @cli comments and add them as commands

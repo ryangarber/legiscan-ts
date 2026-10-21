@@ -34,12 +34,12 @@
   },
   "scripts": {
     "build": "tsdown",
+    "build:cli": "tsx scripts/build.ts",
     "check": "biome check . && tsc --noEmit",
     "check:fix": "biome check --write .",
     "format": "biome format --write .",
     "lint": "biome lint .",
     "prepublishOnly": "npm run check && npm test -- --run && npm run build",
-    "release": "bumpp --commit --push --tag && pnpm publish",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
     "typegen": "tsx scripts/typegen.ts"
