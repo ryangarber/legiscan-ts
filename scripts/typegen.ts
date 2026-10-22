@@ -13,7 +13,7 @@ import {
   zGetSessionPeople,
   zGetSponsoredList,
   zGetSupplement,
-} from "../src/schemas/types.js";
+} from "../src/schemas/types.ts";
 
 mkdirSync(resolve(import.meta.dirname, "../src/generated"), {
   recursive: true,

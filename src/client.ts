@@ -16,7 +16,7 @@ import {
   SupplementType,
   TextType,
   Vote
-} from "./enums.js";
+} from "./enums.ts";
 import type {
   Amendment,
   Bill,
@@ -29,7 +29,7 @@ import type {
   SessionPeople,
   SponsoredList,
   Supplement
-} from "./generated/types.js";
+} from "./generated/types.ts";
 import {
   type _zSession,
   zGetAmendment,
@@ -43,7 +43,7 @@ import {
   zGetSessionPeople,
   zGetSponsoredList,
   zGetSupplement
-} from "./schemas/types.js";
+} from "./schemas/types.ts";
 
 /**
  * Converts a PHP object with numerical keys into entries for consumption by other JS methods
@@ -72,10 +72,14 @@ export function numericalToArray(object: Record<string, any>) {
  * Class to instantiate a client for the Legiscan API
  */
 export class LegiscanClient {
+  public key: string | undefined;
+
   /**
    * @param key the key for the API, defaults to your $LEGISCAN_API_KEY env variable
    */
-  constructor(public key: string | undefined = process?.env?.LEGISCAN_API_KEY) {}
+  constructor(key?: string | undefined) {
+    this.key = key ?? process?.env?.LEGISCAN_API_KEY;
+  }
 
   /**
    * Make an API request, adding the key automatically
@@ -112,7 +116,7 @@ export class LegiscanClient {
   /**
    * Get a list of sessions for a state
    * @cli {getSessionList} sessionlist
-   * @param [state] The US state, or all states if omitted
+   * @param {State} [state] The US state, or all states if omitted
    */
   async getSessionList({ state }: { state?: Needle }): Promise<SessionList> {
     const { sessions } = await this.request("getSessionList", {
@@ -145,8 +149,8 @@ export class LegiscanClient {
   /**
    * Get a list of all bills for a given session or state
    * @cli {getMasterList} masterlist
-   * @param [state] US State, will return the current session
-   * @param [session] the ID retrieved from getSessionList()
+   * @param {State} [state] US State, will return the current session
+   * @param {number} [session] the ID retrieved from getSessionList()
    */
   async getMasterList({
     state,
@@ -182,7 +186,7 @@ export class LegiscanClient {
   /**
    * Get the full text of a bill
    * @cli {getBillText} billtext
-   * @param id bill ID to request
+   * @param {number} id bill ID to request
    */
   async getBillText({ id }: { id: number }): Promise<BillText> {
     const { text } = await this.request("getBillText", { id });
@@ -217,7 +221,7 @@ export class LegiscanClient {
   /**
    * Get the details for a bill (such as status or history)
    * @cli {getBill} bill
-   * @param id bill ID to request
+   * @param {number} id bill ID to request
    */
   async getBill({ id }: { id: number }): Promise<Bill> {
     const { bill } = await this.request("getBill", { id });
@@ -424,7 +428,7 @@ export class LegiscanClient {
   /**
    * Get the text of an amendment
    * @cli {getAmendment} amendment
-   * @param id amendment ID number (probably from getBill)
+   * @param {number} id amendment ID number (probably from getBill)
    */
   async getAmendment({ id }: { id: number }): Promise<Amendment> {
     const { amendment } = await this.request("getAmendment", { id });
@@ -459,7 +463,7 @@ export class LegiscanClient {
   /**
    * Get the text of a supplement (such as a fiscal note or analysis)
    * @cli {getSupplement} supplement
-   * @param id supplement ID number (probably from getBill)
+   * @param {number} id supplement ID number (probably from getBill)
    */
   async getSupplement({ id }: { id: number }): Promise<Supplement> {
     const { supplement } = await this.request("getSupplement", { id });
@@ -492,7 +496,7 @@ export class LegiscanClient {
   /**
    * Get the details of a roll call vote
    * @cli {getRollCall} rollcall
-   * @param id vote ID number
+   * @param {number} id vote ID number
    */
   async getRollCall({ id }: { id: number }): Promise<RollCall> {
     const { roll_call } = await this.request("getRollCall", { id });
@@ -521,7 +525,7 @@ export class LegiscanClient {
   /**
    * Get details on a person by ID
    * @cli {getPerson} person
-   * @param id The Legiscan person ID
+   * @param {number} id The Legiscan person ID
    */
   async getPerson({ id }: { id: number }): Promise<Person> {
     const { person } = await this.request("getPerson", { id });
@@ -559,7 +563,7 @@ export class LegiscanClient {
   /**
    * Get all active people in a given legislative session
    * @cli {getSessionPeople} sessionpeople
-   * @param id The Legiscan session ID
+   * @param {number} id The Legiscan session ID
    */
   async getSessionPeople({ id }: { id: number }): Promise<SessionPeople> {
     const {
@@ -601,7 +605,7 @@ export class LegiscanClient {
   /**
    * Get a list of bills sponsored by a specific person
    * @cli {getSponsoredList} sponsoredlist
-   * @param id Legiscan person ID for the sponsor
+   * @param {number} id Legiscan person ID for the sponsor
    */
   async getSponsoredList({ id }: { id: number }): Promise<SponsoredList> {
     const {
@@ -636,9 +640,9 @@ export class LegiscanClient {
   /**
    * Get the results of a search as a complete array containing all response pages
    * @cli {getSearch} search
-   * @param query Full text query
-   * @param [state] US state for this search
-   * @param [year] Year where 1=all, 2=current, 3=recent, 4=prior, >1900=exact
+   * @param {string} query Full text query
+   * @param {State} [state] US state for this search
+   * @param {number} [year] Year where 1=all, 2=current, 3=recent, 4=prior, >1900=exact
    */
   async getSearch({
     query,

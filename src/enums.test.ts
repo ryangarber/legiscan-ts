@@ -1,5 +1,4 @@
-import { assert, test } from "vitest";
-import { asName, asNumber, State } from "./enums.js";
+import { asName, asNumber, State } from "./enums.ts";
 
 test("test conversion", () => {
   assert.equal(asName(State, 51), "DC");

@@ -14,7 +14,7 @@ import {
   Vote,
   zNames,
   zNumbers
-} from "../enums.js";
+} from "../enums.ts";
 
 export const _zSession = z.object({
   session_id: z.number().describe("Internal session id"),
