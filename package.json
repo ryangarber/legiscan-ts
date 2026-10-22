@@ -35,14 +35,14 @@
   "scripts": {
     "cli": "node src/cli.ts",
     "build": "tsdown && pnpm man",
-    "build:cli": "tsx scripts/build.ts",
+    "build:cli": "node ./scripts/build.ts",
     "lint": "biome check --write .",
     "format": "biome format --write .",
     "prepublishOnly": "npm run check && npm test -- --run && npm run build",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
-    "typegen": "tsx scripts/typegen.ts",
-    "man": "tsx scripts/man.ts"
+    "typegen": "node ./scripts/typegen.ts",
+    "man": "node ./scripts/man.ts"
   },
   "engines": {
     "node": ">=22.13.0"
@@ -63,7 +63,6 @@
     "json-schema-to-typescript": "^16.0.0",
     "knip": "^6.42.1",
     "tsdown": "^0.23.1",
-    "tsx": "^4.23.15",
     "typescript": "^7.0.2",
     "vitest": "^5.0.5"
   },

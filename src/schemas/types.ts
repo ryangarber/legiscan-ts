@@ -47,7 +47,7 @@ export type zGetSessionList = z.infer<typeof zGetSessionList>;
 
 export const _zBillText = z.object({
   doc_id: z.number().describe("Internal document id"),
-  bill_id: z.number().describe("Internal bill id"),
+  bill_id: z.number().optional().describe("Internal bill id"),
   type: zNames(TextType).describe("Type of draft text"),
   type_id: zNumbers(TextType).describe("Internal text type id"),
   type_raw: z.string().describe("Internal text type name"),
