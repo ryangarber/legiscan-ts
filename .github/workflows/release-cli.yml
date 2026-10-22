@@ -43,9 +43,6 @@ jobs:
         with:
           cache: true
 
-      - name: Generate types
-        run: pnpm typegen
-
       # A dry run builds a commit whose version rylease never wrote; the
       # binary reports the version it was built with.
       - name: Write version
@@ -55,9 +52,9 @@ jobs:
         run: pnpm pkg set "version=$VERSION"
 
       - name: Build
-        run: pnpm build:cli --target all --out "$RUNNER_TEMP/cli-artifacts"
+        run: pnpm typegen && pnpm build:cli --target all --out "$RUNNER_TEMP/cli-artifacts"
 
-      - name: Publish binaries
+      - name: Publish
         uses: ryangarber/rylease@v3
         with:
           version: ${{ inputs.version }}

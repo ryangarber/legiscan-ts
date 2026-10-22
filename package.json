@@ -8,11 +8,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RyanGarber/legiscan-ts.git"
+    "url": "git+https://github.com/ryangarber/legiscan-ts.git"
   },
-  "homepage": "https://github.com/RyanGarber/legiscan-ts#readme",
+  "homepage": "https://github.com/ryangarber/legiscan-ts#readme",
   "bugs": {
-    "url": "https://github.com/RyanGarber/legiscan-ts/issues"
+    "url": "https://github.com/ryangarber/legiscan-ts/issues"
   },
   "license": "GPL-3.0",
   "type": "module",
@@ -37,8 +37,6 @@
     "build": "tsdown && pnpm man",
     "build:cli": "node ./scripts/build.ts",
     "lint": "biome check --write .",
-    "format": "biome format --write .",
-    "prepublishOnly": "npm run check && npm test -- --run && npm run build",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
     "typegen": "node ./scripts/typegen.ts",

@@ -49,7 +49,7 @@ Generally, the objects returned by the client methods will match the schema desc
 
 When installed globally, or when executed from an `npm run` script, the `legiscan` command provides [ND-JSON](https://github.com/ndjson/ndjson-spec) output from API calls. Some of these calls return a lot of results, or need to be filtered, and that's easier to do with newline-delimited output in languages and tools that support streaming from invoked processes.
 
-To use it without Node, download the standalone build for your system (`legiscan-darwin-arm64`, `legiscan-darwin-x64`, `legiscan-linux-arm64`, `legiscan-linux-x64`, `legiscan-win32-arm64.exe` or `legiscan-win32-x64.exe`) from the [latest release](https://github.com/RyanGarber/legiscan-ts/releases/latest), or build it from source with `pnpm build:cli` (needs [Bun](https://bun.sh)).
+To use it without Node, download the standalone build for your system (`legiscan-darwin-arm64`, `legiscan-darwin-x64`, `legiscan-linux-arm64`, `legiscan-linux-x64`, `legiscan-win32-arm64.exe` or `legiscan-win32-x64.exe`) from the [latest release](https://github.com/ryangarber/legiscan-ts/releases/latest), or build it from source with `pnpm build:cli` (needs [Bun](https://bun.sh)).
 
 The command line takes a case-insensitive API method name as its first argument, followed by positional arguments for required input and flags for optional parameters matching the Legiscan documentation:
 
