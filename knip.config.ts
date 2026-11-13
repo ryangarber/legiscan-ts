@@ -1,5 +1,6 @@
 import type { KnipConfig } from "knip";
 
 export default {
-  ignoreExportsUsedInFile: { "src/schemas/types.ts": true }
+  tags: ["-lintignore"],
+  ignore: ["samples/**"]
 } satisfies KnipConfig;

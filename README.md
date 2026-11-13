@@ -3,11 +3,12 @@ A modern TypeScript fork of [Civic News's JavaScript library](https://github.com
 # Changes from the original library
 
 This library is a complete rewrite of the original JavaScript client, with the following goals:
-* Use TypeScript for a better developer experience
-* Normalize API responses to be more consistent and easier to work with
-* Keep up to date with the LegiScan API
-* Replace deprecated dependencies
-* Add tests for the client
+
+- Use TypeScript for a better developer experience
+- Normalize API responses to be more consistent and easier to work with
+- Keep up to date with the LegiScan API
+- Replace deprecated dependencies
+- Add tests for the client
 
 # Installation
 
@@ -101,19 +102,19 @@ The Legiscan API uses a lot of flags and/or sentinel values for things like legi
 
 However, if you're interacting with some API calls that expect to receive these flags, this library also exports a set of constants that can be used to convert between them. The following constants are objects mapping the numeral code to their text value:
 
-* `BillType` - Legislation categories, such as "Bill," Resolution," or "ExecutiveOrder"
-* `EventType` - Distinguishes between hearings, executive sessions, and markup
-* `Party` - Political party associated with sponsors, legislation, and so on
-* `Progress` - Legislation progress from "Prefiled" forward. Note that these IDs are not in chronological order.
-* `Reason` - Not used in the REST API
-* `Role` - The type of person or persons sponsoring a bill
-* `SastType` - Same As/Similar To metadata
-* `SponsorType` - The sponsor relationship to a bill ("Sponsor", "CoSponsor", etc)
-* `Stance` - A position that can be provided when setting an automated monitor list
-* `State` - US State by Postal Code
-* `SupplementType` - Types of supplemental documents for a bill, such as fiscal notes or analysis
-* `TextType` - Types of primary documents for a bill revision
-* `Vote` - "Yea," "Nay," "Not voting," or "Absent"
+- `BillType` - Legislation categories, such as "Bill," Resolution," or "ExecutiveOrder"
+- `EventType` - Distinguishes between hearings, executive sessions, and markup
+- `Party` - Political party associated with sponsors, legislation, and so on
+- `Progress` - Legislation progress from "Prefiled" forward. Note that these IDs are not in chronological order.
+- `Reason` - Not used in the REST API
+- `Role` - The type of person or persons sponsoring a bill
+- `SastType` - Same As/Similar To metadata
+- `SponsorType` - The sponsor relationship to a bill ("Sponsor", "CoSponsor", etc)
+- `Stance` - A position that can be provided when setting an automated monitor list
+- `State` - US State by Postal Code
+- `SupplementType` - Types of supplemental documents for a bill, such as fiscal notes or analysis
+- `TextType` - Types of primary documents for a bill revision
+- `Vote` - "Yea," "Nay," "Not voting," or "Absent"
 
 These map to the numerical code returned by the API. You can use `asName` and `asNumber` to convert between the two. For example, to get the text value of a vote code, or to get the code for a "Nay" vote, you could write:
 

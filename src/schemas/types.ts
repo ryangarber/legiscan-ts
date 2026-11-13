@@ -16,6 +16,7 @@ import {
   zNumbers
 } from "../enums.ts";
 
+/** @public */
 export const _zSession = z.object({
   session_id: z.number().describe("Internal session id"),
   session_name: z.string().describe("State specific session name"),
@@ -37,6 +38,7 @@ export const _zSession = z.object({
 });
 export type _zSession = z.infer<typeof _zSession>;
 
+/** @public */
 export const zGetSessionList = z.array(
   _zSession.extend({
     session_hash: z.hash("md5").nullable().describe("Hash of session data, used for caching"),
@@ -45,6 +47,7 @@ export const zGetSessionList = z.array(
 );
 export type zGetSessionList = z.infer<typeof zGetSessionList>;
 
+/** @public */
 export const _zBillText = z.object({
   doc_id: z.number().describe("Internal document id"),
   bill_id: z.number().optional().describe("Internal bill id"),
@@ -82,14 +85,16 @@ export const _zBillText = z.object({
     .nullable()
     .describe("MD5 hash of the decoded BASE64 alternate document")
 });
-export type _zBilLText = z.infer<typeof _zBillText>;
+export type _zBillText = z.infer<typeof _zBillText>;
 
+/** @public */
 export const zGetBillText = _zBillText.extend({
   doc: z.base64().describe("BASE64 encoded document"),
   alt_doc: z.unknown() // undocumented
 });
 export type zGetBillText = z.infer<typeof zGetBillText>;
 
+/** @public */
 export const _zCommittee = z.object({
   committee_id: z.number().describe("Internal committee id"),
   chamber_raw: z.string().describe("Internal chamber name, e.g. 'S' or 'H'"),
@@ -98,12 +103,14 @@ export const _zCommittee = z.object({
 });
 export type _zCommittee = z.infer<typeof _zCommittee>;
 
+/** @public */
 export const _zCommitteeReferral = z.intersection(
   _zCommittee,
   z.object({ date: z.iso.date().describe("Date of referral") })
 );
 export type _zCommitteeReferral = z.infer<typeof _zCommitteeReferral>;
 
+/** @public */
 export const _zBillProgress = z.object({
   date: z.iso.date().describe("Date of progress event"),
   event: zNames(Progress).describe("Normalized progress event"),
@@ -111,6 +118,7 @@ export const _zBillProgress = z.object({
 });
 export type _zBillProgress = z.infer<typeof _zBillProgress>;
 
+/** @public */
 export const _zBillHistory = z.object({
   date: z.iso.date().describe("Date of action"),
   action: z.string().describe("Description of action taken"),
@@ -120,6 +128,7 @@ export const _zBillHistory = z.object({
 });
 export type _zBillHistory = z.infer<typeof _zBillHistory>;
 
+/** @public */
 export const _zPerson = z.object({
   people_id: z.number().describe("Internal person id"),
   person_hash: z.string().describe("Hash of the person's details, used for caching"),
@@ -152,9 +161,11 @@ export const _zPerson = z.object({
 });
 export type _zPerson = z.infer<typeof _zPerson>;
 
-export const zGetPerson = _zPerson;
+/** @public */
+export const zGetPerson = _zPerson.extend({});
 export type zGetPerson = z.infer<typeof zGetPerson>;
 
+/** @public */
 export const _zSast = z.object({
   type: zNames(SastType).describe("Normalized sast type"),
   type_id: zNumbers(SastType).describe("Internal sast id"),
@@ -164,12 +175,14 @@ export const _zSast = z.object({
 });
 export type _zSast = z.infer<typeof _zSast>;
 
+/** @public */
 export const _zSubject = z.object({
   subject_id: z.number().describe("Internal subject id"),
   subject_name: z.string().describe("Name of the subject")
 });
 export type _zSubject = z.infer<typeof _zSubject>;
 
+/** @public */
 export const _zVote = z.object({
   roll_call_id: z.number().describe("Internal roll call id"),
   date: z.iso.date().describe("Date of the vote"),
@@ -185,6 +198,7 @@ export const _zVote = z.object({
 });
 export type _zVote = z.infer<typeof _zVote>;
 
+/** @public */
 export const _zAmendment = z.object({
   amendment_id: z.number().describe("Internal amendment id"),
   adopted: z.boolean().describe("Flag for whether the amendment was adopted"),
@@ -223,6 +237,7 @@ export const _zAmendment = z.object({
 });
 export type _zAmendment = z.infer<typeof _zAmendment>;
 
+/** @public */
 export const zGetAmendment = _zAmendment.extend({
   bill_id: z.number().describe("Internal bill id the amendment belongs to"),
   doc: z.base64().describe("BASE64 encoded document"),
@@ -230,6 +245,7 @@ export const zGetAmendment = _zAmendment.extend({
 });
 export type zGetAmendment = z.infer<typeof zGetAmendment>;
 
+/** @public */
 export const _zSupplement = z.object({
   supplement_id: z.number().describe("Internal supplement id"),
   date: z.iso.date().nullable().describe("Date of the supplement"),
@@ -266,6 +282,7 @@ export const _zSupplement = z.object({
 });
 export type _zSupplement = z.infer<typeof _zSupplement>;
 
+/** @public */
 export const zGetSupplement = _zSupplement.extend({
   bill_id: z.number().describe("Internal bill id the supplement belongs to"),
   doc: z.base64().describe("BASE64 encoded document"),
@@ -273,6 +290,7 @@ export const zGetSupplement = _zSupplement.extend({
 });
 export type zGetSupplement = z.infer<typeof zGetSupplement>;
 
+/** @public */
 export const _zEvent = z.object({
   type: zNames(EventType).describe("Normalized event type"),
   type_id: zNumbers(EventType).describe("Internal event type id"),
@@ -284,6 +302,7 @@ export const _zEvent = z.object({
 });
 export type _zEvent = z.infer<typeof _zEvent>;
 
+/** @public */
 export const _zBill = z.object({
   bill_id: z.number().describe("Internal bill id"),
   bill_number: z.string().describe("Bill number, e.g. HB 1234"),
@@ -298,6 +317,7 @@ export const _zBill = z.object({
 });
 export type _zBill = z.infer<typeof _zBill>;
 
+/** @public */
 export const _zBillWithAction = _zBill.extend({
   last_action: z
     .string()
@@ -312,6 +332,7 @@ export const _zBillWithAction = _zBill.extend({
 export const zGetMasterList = z.array(_zBillWithAction);
 export type zGetMasterList = z.infer<typeof zGetMasterList>;
 
+/** @public */
 export const zGetSearch = z.array(
   _zBillWithAction
     .extend({
@@ -331,17 +352,20 @@ export const zGetSearch = z.array(
 );
 export type zGetSearch = z.infer<typeof zGetSearch>;
 
+/** @public */
 export const _zBillVote = _zVote.extend({
   url: z.url().describe("URL of the vote on legiscan.com"),
   state_link: z.url().describe("URL of the vote on state website")
 });
 
+/** @public */
 export const _zSponsor = _zPerson.extend({
   sponsor_type: zNames(SponsorType).describe("Normalized sponsor type"),
   sponsor_type_id: zNumbers(SponsorType).describe("Internal sponsor type id"),
   sponsor_order: z.number().describe("Order of sponsorship")
 });
 
+/** @public */
 export const zGetBill = _zBill.extend({
   session_id: z.number().describe("Internal session id"),
   session: _zSession.describe("Session object"),
@@ -375,6 +399,7 @@ export const zGetBill = _zBill.extend({
 });
 export type zGetBill = z.infer<typeof zGetBill>;
 
+/** @public */
 export const _zRollCallVote = z.object({
   people_id: z.number().describe("Internal person id"),
   vote: zNames(Vote).describe("Vote of the person"),
@@ -383,15 +408,18 @@ export const _zRollCallVote = z.object({
 });
 export type _zRollCallVote = z.infer<typeof _zRollCallVote>;
 
+/** @public */
 export const zGetRollCall = _zVote.extend({
   bill_id: z.number().describe("Internal bill id the vote belongs to"),
   votes: z.array(_zRollCallVote).describe("Individual votes for the roll call")
 });
 export type zGetRollCall = z.infer<typeof zGetRollCall>;
 
+/** @public */
 export const zGetSessionPeople = z.array(_zPerson.extend({}));
 export type zGetSessionPeople = z.infer<typeof zGetSessionPeople>;
 
+/** @public */
 export const zGetSponsoredList = z.array(
   z.object({
     bill_id: z.number().describe("Internal bill id"),
