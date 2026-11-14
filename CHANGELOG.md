@@ -1,3 +1,11 @@
+## v3.0.1 (2026-11-14)
+
+### Other
+
+- better typegen ([9b20dec](https://github.com/ryangarber/legiscan-ts/commit/9b20dec89bb1d6da9193735718d859e3d51b1cd4))
+- bump dependencies, clean up, rename package ([a376565](https://github.com/ryangarber/legiscan-ts/commit/a3765652ae9967ec5691a11b5e95f64e3c4b3611))
+- drop duplicate from changelog ([ad45949](https://github.com/ryangarber/legiscan-ts/commit/ad459491433ee5708ef7b3abe6f70366e8e97642))
+
 ## v3.0.0 (2026-10-22)
 
 ### Breaking Changes
