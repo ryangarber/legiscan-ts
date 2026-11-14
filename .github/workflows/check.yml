@@ -19,9 +19,6 @@ jobs:
         with:
           cache: true
 
-      - name: Generate types
-        run: pnpm typegen
-
       - name: Format and lint
         run: pnpm lint
 

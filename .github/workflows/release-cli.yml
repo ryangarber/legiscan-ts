@@ -52,7 +52,7 @@ jobs:
         run: pnpm pkg set "version=$VERSION"
 
       - name: Build
-        run: pnpm typegen && pnpm build:cli --target all --out "$RUNNER_TEMP/cli-artifacts"
+        run: pnpm build:cli --target all --out "$RUNNER_TEMP/cli-artifacts"
 
       - name: Publish
         uses: ryangarber/rylease@v3

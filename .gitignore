@@ -31,6 +31,3 @@ Thumbs.db
 cache.json
 outfile.csv
 outfile.json
-
-# typegen
-src/generated/

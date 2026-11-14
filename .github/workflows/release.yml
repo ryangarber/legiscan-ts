@@ -57,7 +57,7 @@ jobs:
           cache: true
 
       - name: Build
-        run: pnpm typegen && pnpm build
+        run: pnpm build
 
       - name: Release
         id: rylease

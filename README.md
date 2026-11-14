@@ -39,12 +39,29 @@ The client provides async methods corresponding to each API call. For example, t
 ```js
 let results = await client.getSearch("education AND javascript");
 for (let result of results) {
-  let details = await client.getBill(result.bill_id);
-  Object.assign(result, details);
+	let details = await client.getBill(result.bill_id);
+	Object.assign(result, details);
 }
 ```
 
 Generally, the objects returned by the client methods will match the schema described in the [API documentation](https://legiscan.com/misc/LegiScan_API_User_Manual.pdf), but with some normalization applied. For example, when calling `getBill`, the status, event, and sponsor type fields will be normalized to their string representations, with an added `*_id` property containing the numerical code. This is meant to create more consistency between API calls, some of which return flags as strings and some as numerical codes.
+
+## Response schemas
+
+The package exports the Zod schemas used to validate the client's normalized responses, such as `zGetBill`, `zGetSearch`, and `zGetSessionList`. You can use their Zod APIs to validate stored responses or compose your own schemas:
+
+```ts
+import { zGetBill, type Bill } from "@ryangarber/legiscan-ts";
+import { z } from "zod";
+
+const bill = zGetBill.parse(savedResponse);
+const summarySchema = zGetBill.pick({ bill_id: true, title: true });
+type Summary = z.infer<typeof summarySchema>;
+```
+
+Field descriptions are available at runtime through `.description` and in IntelliSense on schema properties, parsed results, and inferred types. Response types such as `Bill` are inferred directly from these schemas, and the client uses those same types for its return values.
+
+These schemas describe the normalized client results. Raw LegiScan API responses may need the conversions performed by the client before they can be parsed.
 
 # CLI
 
@@ -84,13 +101,13 @@ var hash = bill.change_hash;
 
 var details = db.data.cache[hash];
 if (details) {
-  // use the cached info
-  details = JSON.parse(details);
+	// use the cached info
+	details = JSON.parse(details);
 } else {
-  // get a fresh copy and cache it
-  details = await client.getBill(bill.bill_id);
-  db.data.cache[hash] = JSON.stringify(details);
-  await db.write();
+	// get a fresh copy and cache it
+	details = await client.getBill(bill.bill_id);
+	db.data.cache[hash] = JSON.stringify(details);
+	await db.write();
 }
 ```
 
