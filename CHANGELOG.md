@@ -1,3 +1,11 @@
+## v3.0.2 (2026-11-20)
+
+### Other
+
+- update package name ([b6c8121](https://github.com/ryangarber/legiscan-ts/commit/b6c8121c51f38d5cf012bdb53cac1379bdb5017d))
+- bump dependencies ([b6c8121](https://github.com/ryangarber/legiscan-ts/commit/b6c8121c51f38d5cf012bdb53cac1379bdb5017d))
+- unpin node [skip ci] ([b0c6306](https://github.com/ryangarber/legiscan-ts/commit/b0c63061cc5bd068975fbafbb5726ba829b736a3))
+
 ## v3.0.1 (2026-11-14)
 
 ### Other
