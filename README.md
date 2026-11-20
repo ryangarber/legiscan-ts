@@ -15,7 +15,7 @@ This library is a complete rewrite of the original JavaScript client, with the f
 For Node or other server-based runtimes, it is recommended to install with PNPM:
 
 ```sh
-pnpm install @ryangarber/legiscan-ts
+pnpm install legiscan-ts
 ```
 
 Although it is primarily intended for use on the server, the client uses only standard runtime APIs like `fetch()`, and (as long as the API continues to use the correct CORS headers) can also run in the browser itself.
@@ -27,7 +27,7 @@ When using Node, this package also installs a command-line client that can be ru
 To interact with the API, import and create an instance of the `LegiscanClient` class, which takes an API key as its argument. You can also set the `$LEGISCAN_API_KEY` environment variable, and then the client will pick that up instead.
 
 ```js
-import { LegiscanClient } from "@ryangarber/legiscan-ts";
+import { LegiscanClient } from "legiscan-ts";
 // providing an API key directly:
 let legiscan = new LegiscanClient(API_KEY);
 // with the environment variable:
@@ -51,7 +51,7 @@ Generally, the objects returned by the client methods will match the schema desc
 The package exports the Zod schemas used to validate the client's normalized responses, such as `zGetBill`, `zGetSearch`, and `zGetSessionList`. You can use their Zod APIs to validate stored responses or compose your own schemas:
 
 ```ts
-import { zGetBill, type Bill } from "@ryangarber/legiscan-ts";
+import { zGetBill, type Bill } from "legiscan-ts";
 import { z } from "zod";
 
 const bill = zGetBill.parse(savedResponse);
@@ -136,7 +136,7 @@ However, if you're interacting with some API calls that expect to receive these 
 These map to the numerical code returned by the API. You can use `asName` and `asNumber` to convert between the two. For example, to get the text value of a vote code, or to get the code for a "Nay" vote, you could write:
 
 ```ts
-import { asName, Vote } from "@ryangarber/legiscan-ts";
+import { asName, Vote } from "legiscan-ts";
 let voteName = asName(Vote, 1); // "Yea"
 let voteNumber = asNumber(Vote, "Nay"); // 2
 // values of the correct type will be returned as-is:
@@ -155,7 +155,7 @@ console.log(response.monitorlist);
 In some cases (including the above monitor list), the API will not return an array for a list of items, but instead will provide an object with numerical keys. In this case, you can use the provided `numericalToArray` function to convert this into an actual JavaScript array (note that this will throw away any non-numerical keys on the object during conversion):
 
 ```js
-import { numericalToArray } from "@ryangarber/legiscan-ts";
+import { numericalToArray } from "legiscan-ts";
 var response = await client.request("getMonitorList", { record: "current" });
 // convert to a native array
 var list = numericalToArray(response.monitorlist);
